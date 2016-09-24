@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "121952221503",
+    "project_id": "cheers-b1c23"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121952221503:android:aeed16cf7b4446cc",
+        "android_client_info": {
+          "package_name": "com.adicohen.cheers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121952221503-ei7k9iqf5nujk99sbo80guodqqu4vkq8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adicohen.cheers",
+            "certificate_hash": "61682A25FF221BD0C29B65E7E493EEF89CEAB063"
+          }
+        },
+        {
+          "client_id": "121952221503-u4iulb46lqp0afbp6ur7al462kah269d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD59qpQ3F7VnpnE0JLY1db0nx_HMsF820c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
