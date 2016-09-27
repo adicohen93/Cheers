@@ -1,9 +1,8 @@
 package com.adicohen.cheers;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +21,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
+    private MyGoogleApiClient_Singleton myGoogleApiClient_singleton;
     private TextView mStatusTextView;
     private static int RC_SIGN_IN = 22;
     private static String TAG = "SignInActivity";
@@ -44,6 +44,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        myGoogleApiClient_singleton = MyGoogleApiClient_Singleton.getInstance(mGoogleApiClient);
+
         // Customize sign-in button. The sign-in button can be displayed in
         // multiple sizes and color schemes. It can also be contextually
         // rendered based on the requested scopes. For example. a red button may
@@ -59,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         mStatusTextView = (TextView) findViewById(R.id.sign_in_result);
+
     }
 
     @Override
@@ -123,11 +126,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            myGoogleApiClient_singleton.set_GoogleSignInAccount(acct);
+            Intent intent = new Intent(this, NavActivity.class);
+            intent.putExtra("email", acct.getEmail());
+            intent.putExtra("name", acct.getDisplayName());
+            intent.putExtra("picture", acct.getPhotoUrl());
+            startActivity(intent);
             // updateUI(true);
-        } else {
-            // Signed out, show unauthenticated UI.
-            // updateUI(false);
+        }
+        else {
+                mStatusTextView.setText("Can't sign in");
         }
     }
 

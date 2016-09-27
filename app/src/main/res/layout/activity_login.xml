@@ -9,10 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.adicohen.cheers.LoginActivity">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+    <Button
+        android:text="Sign out"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/sign_out_button"
+        android:layout_below="@+id/sign_in_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/sign_in_result" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,8 +25,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Who are you?"
         android:id="@+id/sign_in_result"
-        android:layout_marginTop="59dp"
-        android:layout_below="@+id/sign_in_button"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/disconnect_button"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/disconnect_button"
+        android:layout_below="@+id/sign_out_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/sign_out_button" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
