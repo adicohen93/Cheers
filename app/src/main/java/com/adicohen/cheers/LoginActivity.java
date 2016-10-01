@@ -1,6 +1,7 @@
 package com.adicohen.cheers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -46,13 +47,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         myGoogleApiClient_singleton = MyGoogleApiClient_Singleton.getInstance(mGoogleApiClient);
 
-        // Customize sign-in button. The sign-in button can be displayed in
-        // multiple sizes and color schemes. It can also be contextually
-        // rendered based on the requested scopes. For example. a red button may
-        // be displayed when Google+ scopes are requested, but a white button
-        // may be displayed when only basic profile is requested. Try adding the
-        // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
-        // difference.
+        // remember your last login and connect automatically (don't even show SignInActivity
+        SharedPreferences sharedPreferences = getSharedPreferences("APP", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLogin", false);
+        if (isLoggedIn)
+            signIn();
+        
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
@@ -123,19 +123,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        SharedPreferences sharedPreferences = getSharedPreferences("APP", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             myGoogleApiClient_singleton.set_GoogleSignInAccount(acct);
+            editor.putBoolean("isLogin", true);
+            editor.apply();
             Intent intent = new Intent(this, NavActivity.class);
-            intent.putExtra("email", acct.getEmail());
-            intent.putExtra("name", acct.getDisplayName());
-            intent.putExtra("picture", acct.getPhotoUrl());
             startActivity(intent);
             // updateUI(true);
         }
         else {
                 mStatusTextView.setText("Can't sign in");
+                editor.putBoolean("isLogin", false);
+                editor.apply();
         }
     }
 
