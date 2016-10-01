@@ -111,14 +111,12 @@ public class NavActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_current) {
-            //set the fragment initially
             MainFragment fragment = new MainFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         }
         else if (id == R.id.nav_hangouts) {
-            //set the fragment initially
             HangoutsFragment fragment = new HangoutsFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -128,7 +126,10 @@ public class NavActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_places) {
-
+            PlaceListFragment fragment = new PlaceListFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
         }
         else if (id == R.id.nav_settings) {
 
@@ -138,4 +139,5 @@ public class NavActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
